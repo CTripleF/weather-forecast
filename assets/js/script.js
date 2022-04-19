@@ -1,24 +1,25 @@
-// setting global var
-const apiKey = "d5a31c547245680a0f00b2ffe15f45df";
-var searchButton = document.querySelector("#search-btn");
+const apiKey = "037d9c29a23e1486a943e8eef28923c1";
+//var searchButton = document.querySelector("#search-btn");
 
-// empty array to store repo
+// empty array to store info
 var searchArr = [];
 var searchArrTwo = [];
 
 // empty array for search history
-cityArr = [];
+var cityArr = [];
 
 // search by city
 async function getCityDetails(event) {
   event.preventDefault();
+  
+  // console.log(JSON.parse($("search-input").value));
   var searchInput = $("#search-input").val();
-  console.log(searchInput, "searchInput");
+  console.log(searchInput);
   try {
     const cityWeatherRes = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&appid=${apiKey}&units=imperial`
     );
-    console.log("citywweatherres", cityWeatherRes);
+    console.log("citywWeatherRes", cityWeatherRes);
     searchArr = cityWeatherRes.data;
     cityArr.push(cityWeatherRes.data);
   } catch (err) {
@@ -62,6 +63,7 @@ function displayForecast() {
   var windElement = document.createElement("p");
   var uvElement = document.createElement("p");
 
+  
   cityNameElement.innerText = `${searchArr.name}`;
   tempElement.innerText = "Temperature: " + `${searchArr.main.temp}` + "°F";
   humidElement.innerText = "Humidity: " + `${searchArr.main.humidity}` + "%";
